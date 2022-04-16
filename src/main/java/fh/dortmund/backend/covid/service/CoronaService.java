@@ -1,8 +1,7 @@
 package fh.dortmund.backend.covid.service;
 
 import fh.dortmund.backend.covid.model.MassnahmenIndexMonat;
-import fh.dortmund.backend.utility.HttpGenerator;
-import org.json.JSONArray;
+import fh.dortmund.backend.utility.CoronaJSON;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,21 +20,26 @@ public class CoronaService {
     @Value("${corona-datenplattform-tabel.kr_massnahmen_index_monat}")
     private String kr_massnahmen_index_monat;
 
-    private final HttpGenerator httpGenerator;
+    @Value("${corona-datenplattform-tabel.trends}")
+    private String trends;
+
+    private final CoronaJSON coronaJSON;
 
     @Autowired
-    public CoronaService(HttpGenerator httpGenerator) {
-        this.httpGenerator = httpGenerator;
+    public CoronaService(CoronaJSON coronaJSON) {
+        this.coronaJSON = coronaJSON;
     }
+
+    public void getTrends() throws URISyntaxException {
+        for (Object object : coronaJSON.getJSONArrayFromGetRequest(5,trends)) {
+            System.err.println(object);
+        }
+    }
+
 
     public List<MassnahmenIndexMonat> getMassnahmenIndexMonat() throws URISyntaxException {
         List<MassnahmenIndexMonat> massnahmenIndexMonatList = new ArrayList<>();
-        String json = new RestTemplate().exchange(this.httpGenerator.generateURIWithLimitAndResourceId(5, kr_massnahmen_index_monat),
-                HttpMethod.GET,
-                new HttpEntity(this.httpGenerator.getHeaderWithToken()), String.class).getBody();
-        JSONObject jsonObject = new JSONObject(json);
-        jsonObject = jsonObject.getJSONObject("result");
-        for (Object object : jsonObject.getJSONArray("records")) {
+        for (Object object : coronaJSON.getJSONArrayFromGetRequest(5,kr_massnahmen_index_monat)) {
             massnahmenIndexMonatList.add(new MassnahmenIndexMonat(
                     new JSONObject(object.toString()).get("_id").toString(),
                     new JSONObject(object.toString()).get("ags2").toString(),
