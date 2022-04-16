@@ -1,5 +1,8 @@
 package fh.dortmund.backend.controller;
 
+import fh.dortmund.backend.utility.HttpGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,22 +17,21 @@ import java.net.URISyntaxException;
 @RestController
 public class TestController {
 
-    @GetMapping("/")
-    public String getTest() throws URISyntaxException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDk5NDkxNTcsImp0aSI6ImFMVGJudGlzQ1MtSHVGWi15R2IyWGZTZ082VUptWldZVG9ZbFZJc2RMNFEifQ.fNtAZJVhB1UZAF7ecY8E_1s15zWU19HXkHHHTD2l5Sg" );
-        RestTemplate restTemplate = new RestTemplate();
-        URI url= new URI("https://www.corona-datenplattform.de/api/3/action/datastore_search?limit=5&resource_id=af5ad86a-5c10-48e0-a232-1e3464ae4270&");
+    @Value("${corona-datenplattform.token}")
+    private String token;
 
-        ResponseEntity response = restTemplate.exchange(url,
-                HttpMethod.GET,
-                new HttpEntity(headers) ,String.class);
+    private final HttpGenerator httpGenerator;
 
-        System.out.println(response.getBody());
-
-
-        //http://localhost/showck.php
-
-        return "test";
+    @Autowired
+    public TestController(HttpGenerator httpGenerator) {
+        this.httpGenerator = httpGenerator;
     }
+
+    @GetMapping("/test")
+    public String test() throws URISyntaxException {
+        return new RestTemplate().exchange(this.httpGenerator.generateURIWithLimitAndResourceId(5, "af5ad86a-5c10-48e0-a232-1e3464ae4270"),
+                HttpMethod.GET,
+                new HttpEntity(this.httpGenerator.getHeaderWithToken()), String.class).getBody();
+    }
+
 }

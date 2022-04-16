@@ -1,0 +1,3 @@
+corona-datenplattform:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDk5NDkxNTcsImp0aSI6ImFMVGJudGlzQ1MtSHVGWi15R2IyWGZTZ082VUptWldZVG9ZbFZJc2RMNFEifQ.fNtAZJVhB1UZAF7ecY8E_1s15zWU19HXkHHHTD2l5Sg
+  basicURL: https://www.corona-datenplattform.de/api/3/action/datastore_search?
