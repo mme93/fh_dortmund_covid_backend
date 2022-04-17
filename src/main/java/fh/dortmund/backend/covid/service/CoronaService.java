@@ -52,52 +52,60 @@ public class CoronaService {
         this.coronaJSON = coronaJSON;
     }
 
-    public void getImpfdaten(int limit) throws URISyntaxException {
+    public List<?> getImpfdaten(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, impfdaten)) {
 
         }
+        return null;
     }
 
-    public void getGenesene(int limit) throws URISyntaxException {
+    public List<?> getGenesene(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, genesene)) {
 
         }
+        return null;
     }
 
-    public void getHospitalisierung(int limit) throws URISyntaxException {
+    public List<?> getHospitalisierung(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, hospitalisierung)) {
 
         }
+        return null;
     }
 
-    public void getImpfdatenRegional(int limit) throws URISyntaxException {
+    public List<?> getImpfdatenRegional(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, impfdaten_regional)) {
 
         }
+        return null;
     }
 
-    public void getInfektionenKreis(int limit) throws URISyntaxException {
+    public List<?> getInfektionenKreis(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_kreise)) {
 
         }
+        return null;
     }
 
-    public void getInfektionenBundeslaender(int limit) throws URISyntaxException {
+    public List<?> getInfektionenBundeslaender(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_bundeslaender)) {
 
         }
+        return null;
     }
 
-    public void getIntensivstationen(int limit) throws URISyntaxException {
+    public List<?> getIntensivstationen(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, intensivstationen)) {
 
         }
+        return null;
     }
 
-    public void getTodesfaelle(int limit) throws URISyntaxException {
+    public List<?> getTodesfaelle(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, todesfaelle)) {
 
         }
+        return null;
     }
 
     public List<Trends> getTrends(int limit) throws URISyntaxException {

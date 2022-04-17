@@ -25,50 +25,82 @@ public class CoronaController {
 
     //https://www.corona-datenplattform.de/dataset/impfdaten
     @GetMapping("/impfdaten")
-    public void getImpfdaten() {
-
+    public ResponseEntity<List<?>> getImpfdaten() {
+        try {
+            return new ResponseEntity<>(this.coronaService.getImpfdaten(5), HttpStatus.OK);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //https://www.corona-datenplattform.de/dataset/genesene
     @GetMapping("/genesene")
-    public void getGenesene() {
-
+    public ResponseEntity<List<?>> getGenesene() {
+        try {
+            return new ResponseEntity<>(this.coronaService.getGenesene(5), HttpStatus.OK);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //https://www.corona-datenplattform.de/dataset/hospitalisierung
     @GetMapping("/hospitalisierung")
-    public void getHospitalisierung() {
-
+    public ResponseEntity<List<?>> getHospitalisierung() {
+        try {
+            return new ResponseEntity<>(this.coronaService.getHospitalisierung(5), HttpStatus.OK);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //https://www.corona-datenplattform.de/dataset/impfdaten_regional
     @GetMapping("/impfdatenRegional")
-    public void getImpfdatenRegional() {
-
+    public ResponseEntity<List<?>> getImpfdatenRegional() {
+        try {
+            return new ResponseEntity<>(this.coronaService.getImpfdatenRegional(5), HttpStatus.OK);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //https://www.corona-datenplattform.de/dataset/infektionen_kreise
     @GetMapping("/infektionenKreise")
-    public void getInfektionenKreis() {
-
+    public ResponseEntity<List<?>> getInfektionenKreis() {
+        try {
+            return new ResponseEntity<>(this.coronaService.getInfektionenKreis(5), HttpStatus.OK);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //https://www.corona-datenplattform.de/dataset/infektionen_bundeslaender
     @GetMapping("/infektionenBundeslaender")
-    public void getInfektionenBundeslaender() {
-
+    public ResponseEntity<List<?>> getInfektionenBundeslaender() {
+        try {
+            return new ResponseEntity<>(this.coronaService.getInfektionenBundeslaender(5), HttpStatus.OK);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //https://www.corona-datenplattform.de/dataset/intensivstationen
     @GetMapping("/intensivstationen")
-    public void getIntensivstationen() {
-
+    public ResponseEntity<List<?>> getIntensivstationen() {
+        try {
+            return new ResponseEntity<>(this.coronaService.getIntensivstationen(5), HttpStatus.OK);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //https://www.corona-datenplattform.de/dataset/todesfaelle
     @GetMapping("/todesfaelle")
-    public void getTodesfaelle() {
-
+    public ResponseEntity<List<?>> getTodesfaelle() {
+        try {
+            return new ResponseEntity<>(this.coronaService.getTodesfaelle(5), HttpStatus.OK);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //https://www.corona-datenplattform.de/dataset/trends
