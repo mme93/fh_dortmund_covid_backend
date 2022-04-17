@@ -1,6 +1,6 @@
 package fh.dortmund.backend.covid.controller;
 
-import fh.dortmund.backend.covid.model.Trends;
+import fh.dortmund.backend.covid.model.*;
 import fh.dortmund.backend.covid.service.CoronaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class CoronaController {
 
     //https://www.corona-datenplattform.de/dataset/impfdaten
     @GetMapping("/impfdaten")
-    public ResponseEntity<List<?>> getImpfdaten() {
+    public ResponseEntity<List<Impfdaten>> getImpfdaten() {
         try {
             return new ResponseEntity<>(this.coronaService.getImpfdaten(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
@@ -35,7 +35,7 @@ public class CoronaController {
 
     //https://www.corona-datenplattform.de/dataset/genesene
     @GetMapping("/genesene")
-    public ResponseEntity<List<?>> getGenesene() {
+    public ResponseEntity<List<Genesene>> getGenesene() {
         try {
             return new ResponseEntity<>(this.coronaService.getGenesene(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
@@ -45,7 +45,7 @@ public class CoronaController {
 
     //https://www.corona-datenplattform.de/dataset/hospitalisierung
     @GetMapping("/hospitalisierung")
-    public ResponseEntity<List<?>> getHospitalisierung() {
+    public ResponseEntity<List<Hospitalisierung>> getHospitalisierung() {
         try {
             return new ResponseEntity<>(this.coronaService.getHospitalisierung(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
@@ -55,7 +55,7 @@ public class CoronaController {
 
     //https://www.corona-datenplattform.de/dataset/impfdaten_regional
     @GetMapping("/impfdatenRegional")
-    public ResponseEntity<List<?>> getImpfdatenRegional() {
+    public ResponseEntity<List<ImpfdatenRegional>> getImpfdatenRegional() {
         try {
             return new ResponseEntity<>(this.coronaService.getImpfdatenRegional(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
@@ -65,7 +65,7 @@ public class CoronaController {
 
     //https://www.corona-datenplattform.de/dataset/infektionen_kreise
     @GetMapping("/infektionenKreise")
-    public ResponseEntity<List<?>> getInfektionenKreis() {
+    public ResponseEntity<List<InfektionenKreise>> getInfektionenKreis() {
         try {
             return new ResponseEntity<>(this.coronaService.getInfektionenKreis(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
@@ -75,7 +75,7 @@ public class CoronaController {
 
     //https://www.corona-datenplattform.de/dataset/infektionen_bundeslaender
     @GetMapping("/infektionenBundeslaender")
-    public ResponseEntity<List<?>> getInfektionenBundeslaender() {
+    public ResponseEntity<List<InfektionenBundeslaender>> getInfektionenBundeslaender() {
         try {
             return new ResponseEntity<>(this.coronaService.getInfektionenBundeslaender(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
@@ -85,7 +85,7 @@ public class CoronaController {
 
     //https://www.corona-datenplattform.de/dataset/intensivstationen
     @GetMapping("/intensivstationen")
-    public ResponseEntity<List<?>> getIntensivstationen() {
+    public ResponseEntity<List<Intensivstationen>> getIntensivstationen() {
         try {
             return new ResponseEntity<>(this.coronaService.getIntensivstationen(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
@@ -95,7 +95,7 @@ public class CoronaController {
 
     //https://www.corona-datenplattform.de/dataset/todesfaelle
     @GetMapping("/todesfaelle")
-    public ResponseEntity<List<?>> getTodesfaelle() {
+    public ResponseEntity<List<Todesfaelle>> getTodesfaelle() {
         try {
             return new ResponseEntity<>(this.coronaService.getTodesfaelle(5), HttpStatus.OK);
         } catch (URISyntaxException e) {

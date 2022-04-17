@@ -1,7 +1,6 @@
 package fh.dortmund.backend.covid.service;
 
-import fh.dortmund.backend.covid.model.MassnahmenIndexMonat;
-import fh.dortmund.backend.covid.model.Trends;
+import fh.dortmund.backend.covid.model.*;
 import fh.dortmund.backend.utility.CoronaJSON;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,56 +51,56 @@ public class CoronaService {
         this.coronaJSON = coronaJSON;
     }
 
-    public List<?> getImpfdaten(int limit) throws URISyntaxException {
+    public List<Impfdaten> getImpfdaten(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, impfdaten)) {
 
         }
         return null;
     }
 
-    public List<?> getGenesene(int limit) throws URISyntaxException {
+    public List<Genesene> getGenesene(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, genesene)) {
 
         }
         return null;
     }
 
-    public List<?> getHospitalisierung(int limit) throws URISyntaxException {
+    public List<Hospitalisierung> getHospitalisierung(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, hospitalisierung)) {
 
         }
         return null;
     }
 
-    public List<?> getImpfdatenRegional(int limit) throws URISyntaxException {
+    public List<ImpfdatenRegional> getImpfdatenRegional(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, impfdaten_regional)) {
 
         }
         return null;
     }
 
-    public List<?> getInfektionenKreis(int limit) throws URISyntaxException {
+    public List<InfektionenKreise> getInfektionenKreis(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_kreise)) {
 
         }
         return null;
     }
 
-    public List<?> getInfektionenBundeslaender(int limit) throws URISyntaxException {
+    public List<InfektionenBundeslaender> getInfektionenBundeslaender(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_bundeslaender)) {
 
         }
         return null;
     }
 
-    public List<?> getIntensivstationen(int limit) throws URISyntaxException {
+    public List<Intensivstationen> getIntensivstationen(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, intensivstationen)) {
 
         }
         return null;
     }
 
-    public List<?> getTodesfaelle(int limit) throws URISyntaxException {
+    public List<Todesfaelle> getTodesfaelle(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, todesfaelle)) {
 
         }
