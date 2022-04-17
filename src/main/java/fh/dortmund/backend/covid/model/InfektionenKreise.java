@@ -10,4 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InfektionenKreise {
+    private String id;
 }
