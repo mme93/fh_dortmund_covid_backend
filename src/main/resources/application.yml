@@ -5,3 +5,11 @@ corona-datenplattform:
 corona-datenplattform-tabel:
   kr_massnahmen_index_monat: 23e25743-85c5-4dc8-8639-8bb11c339b19
   trends: 5e1cb8fa-79f4-4f4f-acc6-06787b12ee8f
+  todesfaelle: af5ad86a-5c10-48e0-a232-1e3464ae4270
+  intensivstationen: 201bc973-365d-4f80-b668-61486e66403b
+  infektionen_bundeslaender: 6249dd61-b9a8-4200-bb69-ddfc7c90f95e
+  infektionen_kreise: 3cc32ee9-a5de-42f2-afca-f9c07c956d66
+  impfdaten_regional: df59e579-875d-497a-9eda-369722150d89
+  hospitalisierung: 70c145dd-3855-4e36-bdb1-eaa996199c9b
+  genesene: d469b463-daee-40c6-b2ad-f58b00142608
+  impfdaten: 944a8719-a7b9-43f5-ac8f-7c0856978df3
