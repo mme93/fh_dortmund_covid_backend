@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CoronaService {
+public class CoronaDatenplatformService {
 
     @Value("${corona-datenplattform-tabel.kr_massnahmen_index_monat}")
     private String kr_massnahmen_index_monat;
@@ -47,62 +47,100 @@ public class CoronaService {
     private final CoronaJSON coronaJSON;
 
     @Autowired
-    public CoronaService(CoronaJSON coronaJSON) {
+    public CoronaDatenplatformService(CoronaJSON coronaJSON) {
         this.coronaJSON = coronaJSON;
     }
 
     public List<Impfdaten> getImpfdaten(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, impfdaten)) {
-
+            System.err.println(object);
         }
         return null;
     }
 
     public List<Genesene> getGenesene(int limit) throws URISyntaxException {
-        for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, genesene)) {
-
+        List<Genesene> geneseneListe = new ArrayList<>();
+        for (Object json : coronaJSON.getJSONArrayFromGetRequest(limit, genesene)) {
+            Genesene genesene = new Genesene();
+            genesene.setValues(json);
+            geneseneListe.add(genesene);
         }
-        return null;
+        return geneseneListe;
     }
 
     public List<Hospitalisierung> getHospitalisierung(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, hospitalisierung)) {
-
+            System.err.println(object);
         }
         return null;
     }
 
     public List<ImpfdatenRegional> getImpfdatenRegional(int limit) throws URISyntaxException {
+        List<ImpfdatenRegional> impfdatenRegionalList = new ArrayList<>();
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, impfdaten_regional)) {
-
+            impfdatenRegionalList.add(new ImpfdatenRegional(
+                    new JSONObject(object.toString()).get("_id").toString(),
+                    new JSONObject(object.toString()).get("datum").toString(),
+                    new JSONObject(object.toString()).get("bundesland").toString(),
+                    new JSONObject(object.toString()).get("kreis").toString(),
+                    new JSONObject(object.toString()).get("kr_zweitimpf").toString(),
+                    new JSONObject(object.toString()).get("kr_drittimpf_18u60").toString(),
+                    new JSONObject(object.toString()).get("kr_drittimpf_12u18").toString(),
+                    new JSONObject(object.toString()).get("kr_zweitimpf_ab60").toString(),
+                    new JSONObject(object.toString()).get("kr_erstimpf_12u18").toString(),
+                    new JSONObject(object.toString()).get("kr_zweitimpf_12u18").toString(),
+                    new JSONObject(object.toString()).get("kr_drittimpf").toString(),
+                    new JSONObject(object.toString()).get("kr_erstimpf_ab60").toString(),
+                    new JSONObject(object.toString()).get("kr_zweitimpf_18u60").toString(),
+                    new JSONObject(object.toString()).get("kr_erstimpf_18u60").toString(),
+                    new JSONObject(object.toString()).get("kr_erstimpf").toString(),
+                    new JSONObject(object.toString()).get("kr_drittimpf_ab60").toString()
+            ));
         }
-        return null;
+        return impfdatenRegionalList;
     }
 
     public List<InfektionenKreise> getInfektionenKreis(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_kreise)) {
-
+            System.err.println(object);
         }
         return null;
     }
 
     public List<InfektionenBundeslaender> getInfektionenBundeslaender(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_bundeslaender)) {
-
+            System.err.println(object);
         }
         return null;
     }
 
     public List<Intensivstationen> getIntensivstationen(int limit) throws URISyntaxException {
+        List<Intensivstationen> intensivstationenList = new ArrayList<>();
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, intensivstationen)) {
-
+            intensivstationenList.add(new Intensivstationen(
+                    new JSONObject(object.toString()).get("_id").toString(),
+                    new JSONObject(object.toString()).get("datum").toString(),
+                    new JSONObject(object.toString()).get("kreis").toString(),
+                    new JSONObject(object.toString()).get("bundesland").toString(),
+                    new JSONObject(object.toString()).get("kr_its_bett_f_18").toString(),
+                    new JSONObject(object.toString()).get("kr_its_bett_b").toString(),
+                    new JSONObject(object.toString()).get("kr_its_inf_b").toString(),
+                    new JSONObject(object.toString()).get("kr_its_meldeb").toString(),
+                    new JSONObject(object.toString()).get("kr_its_inf_b_ant").toString(),
+                    new JSONObject(object.toString()).get("kr_its_bett_f").toString(),
+                    new JSONObject(object.toString()).get("kr_its_inf").toString(),
+                    new JSONObject(object.toString()).get("kr_its_bett_ew").toString(),
+                    new JSONObject(object.toString()).get("kr_its_bett").toString(),
+                    new JSONObject(object.toString()).get("kr_its_kh").toString(),
+                    new JSONObject(object.toString()).get("kr_its_bett_b_18").toString()
+            ));
         }
-        return null;
+        return intensivstationenList;
     }
 
     public List<Todesfaelle> getTodesfaelle(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, todesfaelle)) {
-
+            System.err.println(object);
         }
         return null;
     }

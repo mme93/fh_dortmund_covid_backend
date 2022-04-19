@@ -1,7 +1,7 @@
 package fh.dortmund.backend.covid.controller;
 
 import fh.dortmund.backend.covid.model.*;
-import fh.dortmund.backend.covid.service.CoronaService;
+import fh.dortmund.backend.covid.service.CoronaDatenplatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +16,18 @@ import java.util.List;
 @RequestMapping("/corona")
 public class CoronaController {
 
-    private final CoronaService coronaService;
+    private final CoronaDatenplatformService coronaDatenplatformService;
 
     @Autowired
-    public CoronaController(CoronaService coronaService) {
-        this.coronaService = coronaService;
+    public CoronaController(CoronaDatenplatformService coronaDatenplatformService) {
+        this.coronaDatenplatformService = coronaDatenplatformService;
     }
 
     //https://www.corona-datenplattform.de/dataset/impfdaten
     @GetMapping("/impfdaten")
     public ResponseEntity<List<Impfdaten>> getImpfdaten() {
         try {
-            return new ResponseEntity<>(this.coronaService.getImpfdaten(5), HttpStatus.OK);
+            return new ResponseEntity<>(this.coronaDatenplatformService.getImpfdaten(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -37,7 +37,7 @@ public class CoronaController {
     @GetMapping("/genesene")
     public ResponseEntity<List<Genesene>> getGenesene() {
         try {
-            return new ResponseEntity<>(this.coronaService.getGenesene(5), HttpStatus.OK);
+            return new ResponseEntity<>(this.coronaDatenplatformService.getGenesene(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -47,7 +47,7 @@ public class CoronaController {
     @GetMapping("/hospitalisierung")
     public ResponseEntity<List<Hospitalisierung>> getHospitalisierung() {
         try {
-            return new ResponseEntity<>(this.coronaService.getHospitalisierung(5), HttpStatus.OK);
+            return new ResponseEntity<>(this.coronaDatenplatformService.getHospitalisierung(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -57,7 +57,7 @@ public class CoronaController {
     @GetMapping("/impfdatenRegional")
     public ResponseEntity<List<ImpfdatenRegional>> getImpfdatenRegional() {
         try {
-            return new ResponseEntity<>(this.coronaService.getImpfdatenRegional(5), HttpStatus.OK);
+            return new ResponseEntity<>(this.coronaDatenplatformService.getImpfdatenRegional(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -67,7 +67,7 @@ public class CoronaController {
     @GetMapping("/infektionenKreise")
     public ResponseEntity<List<InfektionenKreise>> getInfektionenKreis() {
         try {
-            return new ResponseEntity<>(this.coronaService.getInfektionenKreis(5), HttpStatus.OK);
+            return new ResponseEntity<>(this.coronaDatenplatformService.getInfektionenKreis(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -77,7 +77,7 @@ public class CoronaController {
     @GetMapping("/infektionenBundeslaender")
     public ResponseEntity<List<InfektionenBundeslaender>> getInfektionenBundeslaender() {
         try {
-            return new ResponseEntity<>(this.coronaService.getInfektionenBundeslaender(5), HttpStatus.OK);
+            return new ResponseEntity<>(this.coronaDatenplatformService.getInfektionenBundeslaender(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -87,7 +87,7 @@ public class CoronaController {
     @GetMapping("/intensivstationen")
     public ResponseEntity<List<Intensivstationen>> getIntensivstationen() {
         try {
-            return new ResponseEntity<>(this.coronaService.getIntensivstationen(5), HttpStatus.OK);
+            return new ResponseEntity<>(this.coronaDatenplatformService.getIntensivstationen(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -97,7 +97,7 @@ public class CoronaController {
     @GetMapping("/todesfaelle")
     public ResponseEntity<List<Todesfaelle>> getTodesfaelle() {
         try {
-            return new ResponseEntity<>(this.coronaService.getTodesfaelle(5), HttpStatus.OK);
+            return new ResponseEntity<>(this.coronaDatenplatformService.getTodesfaelle(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -107,7 +107,7 @@ public class CoronaController {
     @GetMapping("/trends")
     public ResponseEntity<List<Trends>> getTrends(){
         try {
-            return new ResponseEntity<>(this.coronaService.getTrends(5), HttpStatus.OK);
+            return new ResponseEntity<>(this.coronaDatenplatformService.getTrends(5), HttpStatus.OK);
         } catch (URISyntaxException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
