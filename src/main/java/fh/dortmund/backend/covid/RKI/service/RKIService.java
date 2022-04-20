@@ -1,6 +1,6 @@
-package fh.dortmund.backend.RKI;
+package fh.dortmund.backend.covid.RKI.service;
 
-import fh.dortmund.backend.RKI.model.*;
+import fh.dortmund.backend.covid.RKI.model.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +17,10 @@ import java.util.List;
 public class RKIService {
     //Info für die REST-API Schnittstellen
     //https://arcgis.esri.de/nutzung-der-api-des-rki-covid-19-dashboard/
+
+    public void getHospitalisierungen(){
+
+    }
 
     public List<TagesDaten> getTagesDaten() throws IOException {
         List<TagesDaten> tagesDatenList = new ArrayList<>();

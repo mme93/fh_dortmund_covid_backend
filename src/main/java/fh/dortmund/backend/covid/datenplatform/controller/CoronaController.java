@@ -1,7 +1,7 @@
-package fh.dortmund.backend.covid.controller;
+package fh.dortmund.backend.covid.datenplatform.controller;
 
-import fh.dortmund.backend.covid.model.*;
-import fh.dortmund.backend.covid.service.CoronaDatenplatformService;
+import fh.dortmund.backend.covid.datenplatform.model.*;
+import fh.dortmund.backend.covid.datenplatform.service.CoronaDatenplatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/corona")
+@RequestMapping("/datenplatform")
 public class CoronaController {
 
     private final CoronaDatenplatformService coronaDatenplatformService;

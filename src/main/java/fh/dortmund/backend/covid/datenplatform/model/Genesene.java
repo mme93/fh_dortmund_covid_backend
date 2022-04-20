@@ -1,4 +1,4 @@
-package fh.dortmund.backend.covid.model;
+package fh.dortmund.backend.covid.datenplatform.model;
 
 import org.json.JSONObject;
 

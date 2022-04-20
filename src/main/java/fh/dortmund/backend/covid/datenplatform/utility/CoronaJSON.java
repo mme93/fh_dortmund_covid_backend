@@ -1,4 +1,4 @@
-package fh.dortmund.backend.utility;
+package fh.dortmund.backend.covid.datenplatform.utility;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

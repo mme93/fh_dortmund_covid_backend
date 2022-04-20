@@ -1,6 +1,7 @@
-package fh.dortmund.backend.RKI;
+package fh.dortmund.backend.covid.RKI.controller;
 
-import fh.dortmund.backend.RKI.model.*;
+import fh.dortmund.backend.covid.RKI.service.RKIService;
+import fh.dortmund.backend.covid.RKI.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

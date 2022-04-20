@@ -1,4 +1,4 @@
-package fh.dortmund.backend.RKI.model;
+package fh.dortmund.backend.covid.RKI.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

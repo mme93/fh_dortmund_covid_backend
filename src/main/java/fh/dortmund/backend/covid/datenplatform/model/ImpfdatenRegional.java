@@ -1,4 +1,4 @@
-package fh.dortmund.backend.covid.model;
+package fh.dortmund.backend.covid.datenplatform.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

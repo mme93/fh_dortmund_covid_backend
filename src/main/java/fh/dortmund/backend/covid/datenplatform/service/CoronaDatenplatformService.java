@@ -1,7 +1,8 @@
-package fh.dortmund.backend.covid.service;
+package fh.dortmund.backend.covid.datenplatform.service;
 
-import fh.dortmund.backend.covid.model.*;
-import fh.dortmund.backend.utility.CoronaJSON;
+import fh.dortmund.backend.covid.datenplatform.model.*;
+import fh.dortmund.backend.covid.datenplatform.utility.CoronaJSON;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -139,10 +141,19 @@ public class CoronaDatenplatformService {
     }
 
     public List<Todesfaelle> getTodesfaelle(int limit) throws URISyntaxException {
-        for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, todesfaelle)) {
-            System.err.println(object);
+        List<Todesfaelle> todesfaelleList = new ArrayList<>();
+        JSONArray t = coronaJSON.getJSONArrayFromGetRequest(limit, todesfaelle);
+        for (int i = 0; i < 1; i++) {
+            JSONObject todesfallJSON = t.getJSONObject(i);
+            todesfaelleList.add(new Todesfaelle(
+                    todesfallJSON.get("bundesland").toString(),
+                    todesfallJSON.get("ags2").toString(),
+                    todesfallJSON.get("kreis").toString(),
+                    todesfallJSON.get("variable").toString(),
+                    getDateValueListFromJSON(todesfallJSON.names(), todesfallJSON)
+            ));
         }
-        return null;
+        return todesfaelleList;
     }
 
     public List<Trends> getTrends(int limit) throws URISyntaxException {
@@ -176,5 +187,44 @@ public class CoronaDatenplatformService {
                     new JSONObject(object.toString()).get("kr_mn_idx_m").toString()));
         }
         return massnahmenIndexMonatList;
+    }
+
+    //Utility Method for Date Converting
+    public List<DateValue> getDateValueListFromJSON(JSONArray dateArrayJSON, JSONObject dateValuesJSON) {
+        List<DateValue> dateValueList = new ArrayList<>();
+        for (Object jsonKey : dateArrayJSON) {
+            String date = jsonKey.toString();
+            if (date.startsWith("d")) {
+                dateValueList.add(new DateValue(date.substring(1), dateValuesJSON.get(date).toString()));
+            }
+        }
+        dateValueList = sortDate(dateValueList);
+        for (DateValue dateValue : dateValueList) {
+            String date = dateValue.getDate();
+            dateValue.setDate(date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6));
+        }
+        return dateValueList;
+    }
+
+    public List<DateValue> sortDate(List<DateValue> dateValueList) {
+        List<DateValue> newDateValueList = new ArrayList<>();
+        List<Integer> integerList = new ArrayList<>();
+        for (DateValue dateValue : dateValueList) {
+            try {
+                integerList.add(Integer.parseInt(dateValue.getDate()));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        Collections.sort(integerList);
+        for (Integer date : integerList) {
+            for(DateValue dateValue : dateValueList){
+                if(Integer.parseInt(dateValue.getDate())==date){
+                    newDateValueList.add(dateValue);
+                }
+            }
+
+        }
+        return newDateValueList;
     }
 }

@@ -1,22 +1,21 @@
-package fh.dortmund.backend.covid.model;
+package fh.dortmund.backend.covid.datenplatform.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MassnahmenIndexMonat {
-
-    private String id;
-    private String bundeslandNr;
+public class Todesfaelle {
     private String bundesland;
-    private String ags;
+    private String bundeslandID;
     private String kreis;
-    private String datum;
-    private String index;
+    private String merkmale;
+    private List<DateValue> dateValueList;
 
 }
