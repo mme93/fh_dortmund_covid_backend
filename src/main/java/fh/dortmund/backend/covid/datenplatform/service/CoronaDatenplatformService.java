@@ -60,16 +60,6 @@ public class CoronaDatenplatformService {
         return null;
     }
 
-    public List<Genesene> getGenesene(int limit) throws URISyntaxException {
-        List<Genesene> geneseneListe = new ArrayList<>();
-        for (Object json : coronaJSON.getJSONArrayFromGetRequest(limit, genesene)) {
-            Genesene genesene = new Genesene();
-            genesene.setValues(json);
-            geneseneListe.add(genesene);
-        }
-        return geneseneListe;
-    }
-
     public List<Hospitalisierung> getHospitalisierung(int limit) throws URISyntaxException {
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, hospitalisierung)) {
             System.err.println(object);
@@ -102,20 +92,6 @@ public class CoronaDatenplatformService {
         return impfdatenRegionalList;
     }
 
-    public List<InfektionenKreise> getInfektionenKreis(int limit) throws URISyntaxException {
-        for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_kreise)) {
-            System.err.println(object);
-        }
-        return null;
-    }
-
-    public List<InfektionenBundeslaender> getInfektionenBundeslaender(int limit) throws URISyntaxException {
-        for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_bundeslaender)) {
-            System.err.println(object);
-        }
-        return null;
-    }
-
     public List<Intensivstationen> getIntensivstationen(int limit) throws URISyntaxException {
         List<Intensivstationen> intensivstationenList = new ArrayList<>();
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, intensivstationen)) {
@@ -139,7 +115,51 @@ public class CoronaDatenplatformService {
         }
         return intensivstationenList;
     }
+    public List<InfektionenKreise> getInfektionenKreis(int limit) throws URISyntaxException {
+        List<InfektionenKreise> infektionskreisListe = new ArrayList<>();
+        JSONArray infektionskreisJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, genesene);
+        for (int i=0;i<infektionskreisJSONArray.length();i++) {
+            JSONObject infektionskreisJSON = infektionskreisJSONArray.getJSONObject(i);
+            infektionskreisListe.add(new InfektionenKreise(
+                    infektionskreisJSON.get("bundesland").toString(),
+                    infektionskreisJSON.get("ags2").toString(),
+                    infektionskreisJSON.get("kreis").toString(),
+                    infektionskreisJSON.get("variable").toString(),
+                    getDateValueListFromJSON(infektionskreisJSON.names(), infektionskreisJSON)
+            ));
+        }
+        return infektionskreisListe;
+    }
 
+    public List<InfektionenBundeslaender> getInfektionenBundeslaender(int limit) throws URISyntaxException {
+        List<InfektionenBundeslaender> infektionenBundeslaenderListe = new ArrayList<>();
+        JSONArray infektionenBundeslaenderJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, genesene);
+        for (int i=0;i<infektionenBundeslaenderJSONArray.length();i++) {
+            JSONObject infektionenBundeslaenderJSON = infektionenBundeslaenderJSONArray.getJSONObject(i);
+            infektionenBundeslaenderListe.add(new InfektionenBundeslaender(
+                    infektionenBundeslaenderJSON.get("bundesland").toString(),
+                    infektionenBundeslaenderJSON.get("ags2").toString(),
+                    infektionenBundeslaenderJSON.get("variable").toString(),
+                    getDateValueListFromJSON(infektionenBundeslaenderJSON.names(), infektionenBundeslaenderJSON)
+            ));
+        }
+        return infektionenBundeslaenderListe;
+    }
+    public List<Genesene> getGenesene(int limit) throws URISyntaxException {
+        List<Genesene> geneseneListe = new ArrayList<>();
+        JSONArray genesenJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, genesene);
+        for (int i=0;i<genesenJSONArray.length();i++) {
+            JSONObject genesenJSON = genesenJSONArray.getJSONObject(i);
+            geneseneListe.add(new Genesene(
+                    genesenJSON.get("bundesland").toString(),
+                    genesenJSON.get("ags2").toString(),
+                    genesenJSON.get("kreis").toString(),
+                    genesenJSON.get("variable").toString(),
+                    getDateValueListFromJSON(genesenJSON.names(), genesenJSON)
+            ));
+        }
+        return geneseneListe;
+    }
     public List<Todesfaelle> getTodesfaelle(int limit) throws URISyntaxException {
         List<Todesfaelle> todesfaelleList = new ArrayList<>();
         JSONArray todesfaelleJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, todesfaelle);

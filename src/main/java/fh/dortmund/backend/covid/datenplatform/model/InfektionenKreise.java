@@ -5,10 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class InfektionenKreise {
-    private String id;
+    private String bundesland;
+    private String bundeslandID;
+    private String kreis;
+    private String merkmale;
+    private List<DateValue> dateValueList;
 }
