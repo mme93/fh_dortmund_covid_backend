@@ -142,9 +142,9 @@ public class CoronaDatenplatformService {
 
     public List<Todesfaelle> getTodesfaelle(int limit) throws URISyntaxException {
         List<Todesfaelle> todesfaelleList = new ArrayList<>();
-        JSONArray t = coronaJSON.getJSONArrayFromGetRequest(limit, todesfaelle);
-        for (int i = 0; i < 1; i++) {
-            JSONObject todesfallJSON = t.getJSONObject(i);
+        JSONArray todesfaelleJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, todesfaelle);
+        for (int i = 0; i < todesfaelleJSONArray.length(); i++) {
+            JSONObject todesfallJSON = todesfaelleJSONArray.getJSONObject(i);
             todesfaelleList.add(new Todesfaelle(
                     todesfallJSON.get("bundesland").toString(),
                     todesfallJSON.get("ags2").toString(),
