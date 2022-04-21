@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -21,6 +22,15 @@ public class CoronaController {
     @Autowired
     public CoronaController(CoronaDatenplatformService coronaDatenplatformService) {
         this.coronaDatenplatformService = coronaDatenplatformService;
+    }
+
+    @GetMapping("/hospitalisierungen")
+    public ResponseEntity<List<Hospitalisierungen>> getHospitalisierungen() {
+        try {
+            return new ResponseEntity<>(coronaDatenplatformService.getHospitalisierungen(),HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //https://www.corona-datenplattform.de/dataset/impfdaten

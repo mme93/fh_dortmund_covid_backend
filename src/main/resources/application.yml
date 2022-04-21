@@ -12,3 +12,6 @@ corona-datenplattform-tabel:
   impfdaten_regional: df59e579-875d-497a-9eda-369722150d89
   genesene: d469b463-daee-40c6-b2ad-f58b00142608
   impfdaten: 944a8719-a7b9-43f5-ac8f-7c0856978df3
+
+raw-githubusercontent:
+  url: https://raw.githubusercontent.com/robert-koch-institut/COVID-19-Hospitalisierungen_in_Deutschland/master/Aktuell_Deutschland_COVID-19-Hospitalisierungen.csv

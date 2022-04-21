@@ -2,13 +2,18 @@ package fh.dortmund.backend.covid.datenplatform.service;
 
 import fh.dortmund.backend.covid.datenplatform.model.*;
 import fh.dortmund.backend.covid.datenplatform.utility.CoronaJSON;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,11 +48,36 @@ public class CoronaDatenplatformService {
     @Value("${corona-datenplattform-tabel.impfdaten}")
     private String impfdaten;
 
+    @Value("${raw-githubusercontent.url}")
+    private String hospitalisierungenURL;
+
+
     private final CoronaJSON coronaJSON;
 
     @Autowired
     public CoronaDatenplatformService(CoronaJSON coronaJSON) {
         this.coronaJSON = coronaJSON;
+    }
+
+    public List<Hospitalisierungen> getHospitalisierungen() throws IOException {
+        List<Hospitalisierungen> hospitalisierungenList = new ArrayList<>();
+        URL url = new URL(hospitalisierungenURL);
+        String hospitalisierungsCSV = IOUtils.toString(url, Charset.forName("UTF-8"));
+        String hospitalisierungsCSVArray[] = hospitalisierungsCSV.split("\\r?\\n");
+        System.err.println(hospitalisierungsCSVArray[0]);
+        System.err.println(hospitalisierungsCSVArray[1]);
+        for (int i = 1; i < hospitalisierungsCSVArray.length; i++) {
+            String info[] = hospitalisierungsCSVArray[i].split(",");
+            hospitalisierungenList.add(new Hospitalisierungen(
+                    info[0],
+                    info[1],
+                    info[2],
+                    info[3],
+                    info[4],
+                    info[5]
+            ));
+        }
+        return hospitalisierungenList;
     }
 
     public List<Impfdaten> getImpfdaten(int limit) throws URISyntaxException {
@@ -155,10 +185,11 @@ public class CoronaDatenplatformService {
         }
         return intensivstationenList;
     }
+
     public List<InfektionenKreise> getInfektionenKreis(int limit) throws URISyntaxException {
         List<InfektionenKreise> infektionskreisListe = new ArrayList<>();
         JSONArray infektionskreisJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_kreise);
-        for (int i=0;i<infektionskreisJSONArray.length();i++) {
+        for (int i = 0; i < infektionskreisJSONArray.length(); i++) {
             JSONObject infektionskreisJSON = infektionskreisJSONArray.getJSONObject(i);
             infektionskreisListe.add(new InfektionenKreise(
                     infektionskreisJSON.get("bundesland").toString(),
@@ -174,7 +205,7 @@ public class CoronaDatenplatformService {
     public List<InfektionenBundeslaender> getInfektionenBundeslaender(int limit) throws URISyntaxException {
         List<InfektionenBundeslaender> infektionenBundeslaenderListe = new ArrayList<>();
         JSONArray infektionenBundeslaenderJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_bundeslaender);
-        for (int i=0;i<infektionenBundeslaenderJSONArray.length();i++) {
+        for (int i = 0; i < infektionenBundeslaenderJSONArray.length(); i++) {
             JSONObject infektionenBundeslaenderJSON = infektionenBundeslaenderJSONArray.getJSONObject(i);
             infektionenBundeslaenderListe.add(new InfektionenBundeslaender(
                     infektionenBundeslaenderJSON.get("bundesland").toString(),
@@ -185,10 +216,11 @@ public class CoronaDatenplatformService {
         }
         return infektionenBundeslaenderListe;
     }
+
     public List<Genesene> getGenesene(int limit) throws URISyntaxException {
         List<Genesene> geneseneListe = new ArrayList<>();
         JSONArray genesenJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, genesene);
-        for (int i=0;i<genesenJSONArray.length();i++) {
+        for (int i = 0; i < genesenJSONArray.length(); i++) {
             JSONObject genesenJSON = genesenJSONArray.getJSONObject(i);
             geneseneListe.add(new Genesene(
                     genesenJSON.get("bundesland").toString(),
@@ -200,6 +232,7 @@ public class CoronaDatenplatformService {
         }
         return geneseneListe;
     }
+
     public List<Todesfaelle> getTodesfaelle(int limit) throws URISyntaxException {
         List<Todesfaelle> todesfaelleList = new ArrayList<>();
         JSONArray todesfaelleJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, todesfaelle);
@@ -278,8 +311,8 @@ public class CoronaDatenplatformService {
         }
         Collections.sort(integerList);
         for (Integer date : integerList) {
-            for(DateValue dateValue : dateValueList){
-                if(Integer.parseInt(dateValue.getDate())==date){
+            for (DateValue dateValue : dateValueList) {
+                if (Integer.parseInt(dateValue.getDate()) == date) {
                     newDateValueList.add(dateValue);
                 }
             }
