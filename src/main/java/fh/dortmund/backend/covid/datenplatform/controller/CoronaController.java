@@ -42,15 +42,11 @@ public class CoronaController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    //TODO: https://raw.githubusercontent.com/robert-koch-institut/COVID-19-Hospitalisierungen_in_Deutschland/master/Aktuell_Deutschland_COVID-19-Hospitalisierungen.csv
     //https://www.corona-datenplattform.de/dataset/hospitalisierung
     @GetMapping("/hospitalisierung")
-    public ResponseEntity<List<Hospitalisierung>> getHospitalisierung() {
-        try {
-            return new ResponseEntity<>(this.coronaDatenplatformService.getHospitalisierung(5), HttpStatus.OK);
-        } catch (URISyntaxException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<List<?>> getHospitalisierung() {
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     //https://www.corona-datenplattform.de/dataset/impfdaten_regional

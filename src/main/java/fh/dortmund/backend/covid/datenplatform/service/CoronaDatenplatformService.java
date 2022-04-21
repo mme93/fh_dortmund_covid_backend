@@ -60,13 +60,6 @@ public class CoronaDatenplatformService {
         return null;
     }
 
-    public List<Hospitalisierung> getHospitalisierung(int limit) throws URISyntaxException {
-        for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, hospitalisierung)) {
-            System.err.println(object);
-        }
-        return null;
-    }
-
     public List<ImpfdatenRegional> getImpfdatenRegional(int limit) throws URISyntaxException {
         List<ImpfdatenRegional> impfdatenRegionalList = new ArrayList<>();
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, impfdaten_regional)) {
