@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -61,9 +60,7 @@ public class CoronaDatenplatformService {
 
     public List<Hospitalisierungen> getHospitalisierungen() throws IOException {
         List<Hospitalisierungen> hospitalisierungenList = new ArrayList<>();
-        URL url = new URL(hospitalisierungenURL);
-        String hospitalisierungsCSV = IOUtils.toString(url, Charset.forName("UTF-8"));
-        String hospitalisierungsCSVArray[] = hospitalisierungsCSV.split("\\r?\\n");
+        String hospitalisierungsCSVArray[] = IOUtils.toString(new URL(hospitalisierungenURL), Charset.forName("UTF-8")).split("\\r?\\n");
         for (int i = 1; i < hospitalisierungsCSVArray.length; i++) {
             String info[] = hospitalisierungsCSVArray[i].split(",");
             hospitalisierungenList.add(new Hospitalisierungen(
