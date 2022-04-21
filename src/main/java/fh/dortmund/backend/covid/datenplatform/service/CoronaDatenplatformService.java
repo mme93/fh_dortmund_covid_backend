@@ -64,8 +64,6 @@ public class CoronaDatenplatformService {
         URL url = new URL(hospitalisierungenURL);
         String hospitalisierungsCSV = IOUtils.toString(url, Charset.forName("UTF-8"));
         String hospitalisierungsCSVArray[] = hospitalisierungsCSV.split("\\r?\\n");
-        System.err.println(hospitalisierungsCSVArray[0]);
-        System.err.println(hospitalisierungsCSVArray[1]);
         for (int i = 1; i < hospitalisierungsCSVArray.length; i++) {
             String info[] = hospitalisierungsCSVArray[i].split(",");
             hospitalisierungenList.add(new Hospitalisierungen(
