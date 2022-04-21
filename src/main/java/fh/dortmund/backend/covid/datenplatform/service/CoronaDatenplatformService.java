@@ -37,9 +37,6 @@ public class CoronaDatenplatformService {
     @Value("${corona-datenplattform-tabel.impfdaten_regional}")
     private String impfdaten_regional;
 
-    @Value("${corona-datenplattform-tabel.hospitalisierung}")
-    private String hospitalisierung;
-
     @Value("${corona-datenplattform-tabel.genesene}")
     private String genesene;
 
@@ -54,10 +51,60 @@ public class CoronaDatenplatformService {
     }
 
     public List<Impfdaten> getImpfdaten(int limit) throws URISyntaxException {
+        List<Impfdaten> impfdatenList = new ArrayList<>();
         for (Object object : coronaJSON.getJSONArrayFromGetRequest(limit, impfdaten)) {
-            System.err.println(object);
+            impfdatenList.add(new Impfdaten(
+                    new JSONObject(object.toString()).get("ags2").toString(),
+                    new JSONObject(object.toString()).get("bundesland").toString(),
+                    new JSONObject(object.toString()).get("datum").toString(),
+                    new JSONObject(object.toString()).get("bl_impf").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_hs_bt").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_hs_mn").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_hs_az").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_hs_jj").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_ind_alter").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_ind_brfl").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_ind_mdzn").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_ind_phbw").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_vt").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_05u18_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_05u12_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_12u18_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_18u60_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_ab60_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_hs_bt").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_hs_mn").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_hs_az").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_hs_jj").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_ind_alter").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_ind_brfl").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_ind_mdzn").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_ind_phbw").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_vt").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_05u18_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_05u12_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_12u18_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_18u60_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_ab60_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_erstimpf_ab18_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_zweitimpf_ab18_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf_hs_bt").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf_hs_mn").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf_hs_jj").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf_vt").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf_12u18_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf_ab18_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf_18u60_quote").toString(),
+                    new JSONObject(object.toString()).get("bl_drittimpf_ab60_quote").toString()
+            ));
         }
-        return null;
+        return impfdatenList;
     }
 
     public List<ImpfdatenRegional> getImpfdatenRegional(int limit) throws URISyntaxException {
@@ -110,7 +157,7 @@ public class CoronaDatenplatformService {
     }
     public List<InfektionenKreise> getInfektionenKreis(int limit) throws URISyntaxException {
         List<InfektionenKreise> infektionskreisListe = new ArrayList<>();
-        JSONArray infektionskreisJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, genesene);
+        JSONArray infektionskreisJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_kreise);
         for (int i=0;i<infektionskreisJSONArray.length();i++) {
             JSONObject infektionskreisJSON = infektionskreisJSONArray.getJSONObject(i);
             infektionskreisListe.add(new InfektionenKreise(
@@ -126,7 +173,7 @@ public class CoronaDatenplatformService {
 
     public List<InfektionenBundeslaender> getInfektionenBundeslaender(int limit) throws URISyntaxException {
         List<InfektionenBundeslaender> infektionenBundeslaenderListe = new ArrayList<>();
-        JSONArray infektionenBundeslaenderJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, genesene);
+        JSONArray infektionenBundeslaenderJSONArray = coronaJSON.getJSONArrayFromGetRequest(limit, infektionen_bundeslaender);
         for (int i=0;i<infektionenBundeslaenderJSONArray.length();i++) {
             JSONObject infektionenBundeslaenderJSON = infektionenBundeslaenderJSONArray.getJSONObject(i);
             infektionenBundeslaenderListe.add(new InfektionenBundeslaender(

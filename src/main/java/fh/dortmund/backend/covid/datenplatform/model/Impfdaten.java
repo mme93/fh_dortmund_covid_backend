@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Impfdaten {
-    private String id;
     private String ags2;
     private String bundesland;
     private String datum;
